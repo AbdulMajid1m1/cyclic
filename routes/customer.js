@@ -6,7 +6,7 @@ const Conversation = require("../models/Conversation");
 const Notification = require("../models/Notification");
 const isAuth = require("../middleware/auth");
 const stripe = require("stripe")(process.env.STRIPE_SECRET_KEY);
-const BaseUrl = "http://localhost:3000";
+const BaseUrl = "https://cautious-dress.cyclic.app";
 //Selecting Customer Category. and showing Customer posted orders both pending and underway
 router.get("/home/customers/:id", function (req, res) {
   // CustomerOrder.deleteMany({ paymentStatus: false }, (req, res) => {
