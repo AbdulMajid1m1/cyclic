@@ -478,7 +478,7 @@ router.post("/driver/request-delivery-completion/:driverId/:parcelId", function 
       if (err) {
         res.status(500).json({ error: err });
       } else {
-        res.status(500).json({ FoundParcel: parcel });
+        res.status(200).json({ FoundParcel: parcel });
       }
     }
   );

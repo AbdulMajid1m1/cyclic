@@ -179,6 +179,26 @@ router.get("/driver/receive-payment/:driverId/:parcelId", async (req, res) => {
                                     await newConversation.save();
                                   // res.status(200).json(savedConversation);
                                   console.log("conversation" + savedConversation);
+
+                                  CustomerOrder.findOneAndUpdate(
+                                    { _id: req.params.parcelId },
+                                    {
+                                      $set: {
+                                        conversationId: savedConversation._id,
+                                      },
+                                    },
+                                    { new: true },
+                                    async (err, parcel) => {
+                                      if (err) {
+                                        console.log(err);
+                                      }
+                                      else {
+                                        console.log(parcel);
+                                      }
+                                    }
+                                  )
+
+
                                 } catch (err) {
                                   // res.status(500).json(err);
                                   console.log(err);
@@ -196,6 +216,23 @@ router.get("/driver/receive-payment/:driverId/:parcelId", async (req, res) => {
                                     await newConversation.save();
                                   // res.status(200).json(savedConversation);
                                   console.log(savedConversation);
+                                  CustomerOrder.findOneAndUpdate(
+                                    { _id: req.params.parcelId },
+                                    {
+                                      $set: {
+                                        conversationId: savedConversation._id,
+                                      },
+                                    },
+                                    { new: true },
+                                    async (err, parcel) => {
+                                      if (err) {
+                                        console.log(err);
+                                      }
+                                      else {
+                                        console.log(parcel);
+                                      }
+                                    }
+                                  )
                                 } catch (err) {
                                   // res.status(500).json(err);
                                   console.log(err);
