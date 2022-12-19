@@ -314,7 +314,7 @@ router.post("/customer/recieve-delivery/:driverId/:parcelId", function (req, res
             if (err) {
               res.status(500).json({ error: err });
             } else {
-              res.status(500).json({ FoundParcel: parcel });
+              res.status(200).json({ FoundParcel: parcel });
             }
           }
         );
