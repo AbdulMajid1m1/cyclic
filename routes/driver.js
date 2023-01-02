@@ -364,7 +364,7 @@ router.get("/drivers/deliveries/underway/:id", function (req, res) {
 router.get("/drivers/deliveries/completed/:id", function (req, res) {
   // res.send("Send payment receiving form for driver");
   //q1 start
-  Driver.findOne({ user: req.params.id }, (err, driver) => {
+  Driver.findOne({ _id: req.params.id }, (err, driver) => {
     if (err) {
       res.status(500).json({ error: err });
     } else {

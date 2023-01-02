@@ -6,7 +6,7 @@ const Conversation = require("../models/Conversation");
 const Notification = require("../models/Notification");
 const isAuth = require("../middleware/auth");
 const stripe = require("stripe")(process.env.STRIPE_SECRET_KEY);
-const BaseUrl = "https://cautious-dress.cyclic.app";
+const BaseUrl = "http://dropshpper-env.eba-ka3z2saq.us-east-1.elasticbeanstalk.com";
 //Selecting Customer Category. and showing Customer posted orders both pending and underway
 router.get("/home/customers/:id", function (req, res) {
   // CustomerOrder.deleteMany({ paymentStatus: false }, (req, res) => {

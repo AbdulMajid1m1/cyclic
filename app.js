@@ -542,8 +542,8 @@ app.post("/customer-login", function (req, res) {
 ///////////////////////////// ****Only for testing**** ///////////////////////////////////////////////////////////
 
 app.get("/pay", (req, res) => {
-  res.sendFile(__dirname + "/public/Stripe.html");
-  // res.sendFile(__dirname + "/index.html");
+  // res.sendFile(__dirname + "/public/Stripe.html");
+  res.sendFile(__dirname + "/index.html");
 });
 app.get("/log", (req, res) => {
   res.sendFile(__dirname + "/loggedin.html");
@@ -575,11 +575,44 @@ app.get("/stripe", (req, res) => {
 
 ///////////////////////////////////////// ___SERVER PORT___////////////////////////
 const port = process.env.PORT || 3000;
-app.listen(port, function () {
+const server = app.listen(port, function () {
   console.log(`Server has started on ${port}`);
 });
 
+const io = require("socket.io")(server, {
+  pingTimeout: 60000,
+  cors: {
+    // origin: "http://localhost:3000",
+    origin: "http://dropshpper-env.eba-ka3z2saq.us-east-1.elasticbeanstalk.com",
+    // credentials: true,
+  },
+});
 
+
+io.on("connection", (socket) => {
+  console.log("Connected to socket.io and socked id is" + socket.id);
+  socket.emit("hello", socket.id);
+  socket.emit('event', 'Hello from the server!');
+  socket.on("joinRoom", (conversationId) => {
+    socket.join(conversationId);
+    console.log("joined room" + conversationId);
+  });
+  // Listen for chatMessage and send it to all users in the room
+  socket.on("chatMessage", ({ conversationId, msg, senderId }) => {
+    io.to(conversationId).emit("message", { conversationId: conversationId, msg: msg, senderId: senderId });
+    console.log("message sent" + " " + conversationId + " message" + msg + " senderidF" + senderId);
+  });
+
+
+  socket.on('leave room', function (conversationId) {
+    socket.leave(conversationId);
+  });
+
+  socket.on('disconnect', function () {
+    console.log('user disconnected');
+  });
+
+});
 
 
 

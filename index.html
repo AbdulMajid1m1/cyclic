@@ -49,17 +49,43 @@
       ></script>
     </form>
 
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
 
-    <br>
+    <h1>my chat</h1>
+<form action="">
+
+  
+</form>
     <form action="/ac">
-      <input type="text" name="mj">
+      <input type="text" name="mj" />
       <button type="submit"></button>
     </form>
     <script src="./app.js"></script>
+    <script src="/socket.io/socket.io.js"></script>
+    <script>
+      var socket = io();
+
+      // FIRST
+      // socket.emit('joinRoom', { conversationId});
+
+      // seconde send message
+      // Emit message to server
+      // socket.emit('chatMessage',{conversationId, message});
+
+      // socket room to send message to server with conversationId and message and senderId
+      // socket.emit('chatMessage', { conversationId, msg, senderId });
+
+      // Listen for message from server send to the room
+      // socket.on("message", (message) => {
+      //   console.log(message);
+      // });
+    </script>
   </body>
 </html>
-
-
-
-
-
